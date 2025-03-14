@@ -177,13 +177,6 @@ def pDatos(Datos, considerar_alternativo=False):
 def pM_Datos(m, Datos, considerar_alternativo=False):
     # P(M|Datos = {(c0,s0,r0),(c1,s1,r1),...})
 
-    if considerar_alternativo:
-        return (
-            (10 ** pDatos_M(Datos, m, log=True))
-            * pM(m, considerar_alternativo)
-            / pDatos(Datos, considerar_alternativo)
-        )
-
     return (
         pDatos_M(Datos, m)
         * pM(m, considerar_alternativo)
