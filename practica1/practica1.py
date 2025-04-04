@@ -53,7 +53,7 @@ def prcs_M(r, c, s, m):  # P(r,c,s|M)
 
     if m == 0:
         return pr(r) * pc(c) * ps_rM0(s, r)
-    else:
+    if m == 1:
         return pr(r) * pc(c) * ps_rcM1(s, r, c)
 
 
