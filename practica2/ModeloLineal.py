@@ -34,12 +34,6 @@ def moments_posterior(alpha, beta, t, Phi):
     return m_N, S_N
 
 
-def posterior(x, y, m_N, S_N):
-    return normal.pdf(np.array([x,y]).ravel(),m_N.ravel(),S_N)
-
-# Vectorización de la función posterior para aplicarla sobre arrays
-_posterior_v = np.vectorize(posterior)
-
 def moments_prior(alpha, beta, M):
     """
     Calcula los momentos (media y covarianza) de la distribución prior
@@ -145,7 +139,7 @@ def moments_predictive(Phi_posteriori, beta, alpha, t_priori=None, Phi_priori=No
     if t_priori is None:
         t_priori, Phi_priori = np.zeros((0,1)), np.zeros((0,D))
 
-    m_prior, S_prior = posterior(alpha, beta, t_priori, Phi_priori)
+    m_prior, S_prior = moments_posterior(alpha, beta, t_priori, Phi_priori)
 
     # Cálculo de la covarianza predictiva
     sigma2 = Phi_posteriori.dot(S_prior.dot(Phi_posteriori.T)) + (1/beta)*np.eye(Phi_posteriori.shape[0])
